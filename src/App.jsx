@@ -32,10 +32,11 @@ function App() {
   useEffect(() => {
     fetchTasks();
   }, []);
+const DeleteTask = async (id) => {
+  await axios.delete(`${BaseURL}/task/${id}`);
+  fetchTasks();
+};
 
-  const DeleteTask = (index) => {
-    setList(list.filter((_, i) => i !== index));
-  };
 
   return (
     <div className="app-container">
@@ -67,11 +68,11 @@ function App() {
                 <p>{item.description}</p>
               </div>
               <button
-                className="delete-btn"
-                onClick={() => DeleteTask(index)}
-              >
-                ✕
-              </button>
+  className="delete-btn"
+  onClick={() => DeleteTask(item._id)}
+>
+  ✕
+</button>
             </div>
           ))
         ) : (
